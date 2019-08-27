@@ -1,0 +1,50 @@
+﻿@model holaMundo.Models.User
+@{
+    ViewBag.Title = "Crear un nuevo usuario";
+    var getlist = ViewBag.profesion;
+
+}
+
+@using (Html.BeginForm("Create", "User", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-md-12">
+
+        <br /><br /><br />
+        @if (!"".Equals(ViewBag.profesion))
+        {
+            <div class="alert-danger">
+                <h3>@ViewBag.error</h3>
+            </div>
+        }
+
+
+        <h1 class="text-center">@ViewBag.Title</h1>
+        @Html.LabelFor(d => d.nombre)
+        @Html.TextBoxFor(d => d.nombre, "", new { @class = "form-control", @placeholder = "nombre" })
+        @Html.ValidationMessageFor(d => d.nombre, null, new { @class = "red" })
+
+        <br />
+
+        @Html.LabelFor(d => d.email)
+        @Html.TextBoxFor(d => d.email, "", new { @class = "form-control", @placeholder = "email" })
+        @Html.ValidationMessageFor(d => d.email, null, new { @class = "red" })
+        <br />
+        @Html.LabelFor(d => d.apellido)
+        @Html.TextBoxFor(d => d.apellido, "", new { @class = "form-control", @placeholder = "apellido" })
+        @Html.ValidationMessageFor(d => d.apellido, null, new { @class = "red" })
+        <br />
+        @Html.LabelFor(d => d.Profesion)
+        @Html.DropDownListFor(d => d.ProfesionFk, new SelectList(ViewBag.profesion, "id", "nombre"), new { @class = "form-control" })
+
+        @Html.ValidationMessageFor(d => d.ProfesionFk, null, new { @class = "red" })
+
+
+
+        <br />
+        <input type="submit" class="btn btn-primary btn-block" name="Guardar" />
+        <hr />
+    </div>
+</div>
+}
