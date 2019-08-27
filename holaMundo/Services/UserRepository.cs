@@ -61,13 +61,13 @@ namespace holaMundo.Services
 
             using (var db = new ConfigContext())
             {
-                var usuario = db.User.Find(model.id);
+               
                 this.User.id = model.id;
                 this.User.nombre = model.nombre;
                 this.User.email = model.email;
                 this.User.apellido = model.apellido;
                 this.User.ProfesionFk = model.ProfesionFk;
-                db.Entry(this.User).CurrentValues.SetValues(usuario);
+                db.Entry(this.User).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
                 this.User = null;
                
